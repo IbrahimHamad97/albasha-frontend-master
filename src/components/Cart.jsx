@@ -56,7 +56,7 @@ const Cart = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [newItem, setNewItem] = useState();
   const openModal = (item) => {
-    if (item.options.length > 0) {
+    if (item.groups.length > 0) {
       setNewItem(item);
       setIsOpen(true);
     }

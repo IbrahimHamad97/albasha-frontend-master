@@ -8,7 +8,7 @@ const Product = ({ item }) => {
   const [update, setUpdate] = useState(false);
 
   useEffect(() => {
-    if (cart.length > 0) {
+    if (cart?.length > 0) {
       let found = null;
       for (let i = 0; i < cart.length; i++) {
         if (cart[i].index === item.index) {
@@ -26,7 +26,7 @@ const Product = ({ item }) => {
   }, [cart]);
 
   const findItem = () => {
-    const updatedCart = cart.map((cartItem) => {
+    const updatedCart = cart?.map((cartItem) => {
       if (cartItem.index === item.index) {
         return { ...cartItem, quantity: item.quantity };
       }
@@ -65,7 +65,7 @@ const Product = ({ item }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [newItem, setNewItem] = useState();
   const openModal = () => {
-    if (item.options.length > 0) {
+    if (item.groups?.length > 0) {
       setNewItem({ ...item, quantity: 0 });
       setIsOpen(true);
     }
@@ -84,7 +84,7 @@ const Product = ({ item }) => {
   };
 
   const checkIfModal = (meal) => {
-    if (meal.options.length > 0) openModal();
+    if (meal.groups?.length > 0) openModal();
     else changeQuantity(2, meal);
   };
 

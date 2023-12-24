@@ -77,13 +77,13 @@ const OptionsDialog = ({ item, close, add, edit }) => {
         <h1 className="text-2xl font-bold">{item.name}</h1>
         <h1 className="text-lg text-neutral-600 mb-1">{item.description}</h1>
         <div className="max-h-[40vh] overflow-y-auto no-scrollbar">
-          {item.options.map((option, i) => {
+          {item.groups.map((option, i) => {
             return (
               <div key={i}>
                 <p className="text-neutral-400 text-md mb-2">
                   Select up to {option.min} options
                 </p>
-                {option.options.map((opt, index) => {
+                {option.addons?.map((opt, index) => {
                   return (
                     <div
                       key={index}
