@@ -7,13 +7,13 @@ const AppContext = createContext();
 const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [menu, setMenu] = useState([]);
-  const [info, setInfo] = useState([]);
+  const [info, setInfor] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setMenu(await getCategories());
-        setInfo(await getInfo());
+        setInfor(await getInfo());
       } finally {
         setLoading(false);
       }
@@ -23,7 +23,7 @@ const AppProvider = ({ children }) => {
   }, []);
 
   return (
-    <AppContext.Provider value={{ menu, setMenu, info, setInfo }}>
+    <AppContext.Provider value={{ menu, setMenu, info, setInfor }}>
       {loading && (
         <div className="fixed h-screen w-screen flex items-center justify-center z-[9999] bg-white">
           <InfinitySpin color="#4fa94d" />

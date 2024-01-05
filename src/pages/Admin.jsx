@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import AddProduct from "../components/admin/AddProduct";
 import Login from "../components/admin/Login";
 import AddCategory from "../components/admin/AddCategory";
@@ -13,6 +13,7 @@ import {
 } from "../api/admin.controller";
 import { InfinitySpin } from "react-loader-spinner";
 import AddGeneral from "../components/admin/AddGeneral";
+import { AppContext } from "../AppContext";
 
 const Admin = () => {
   const [loading, setLoading] = useState(false);
@@ -25,6 +26,7 @@ const Admin = () => {
   const [token, setToken] = useState(null);
   const [info, setInfo] = useState(null);
   const isMounted = useRef(false);
+  const { setMenu } = useContext(AppContext);
 
   useEffect(() => {
     const fetchTokenAndData = async () => {
@@ -52,7 +54,9 @@ const Admin = () => {
   };
 
   const getCats = async () => {
-    setCategories(await getCategories());
+    const res = await getCategories();
+    setCategories(res);
+    setMenu(res);
   };
 
   const getProds = async () => {

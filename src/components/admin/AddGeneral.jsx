@@ -1,13 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import SharedFormInput from "../sharedFormInput";
 import {
   editInformationHTTP,
+  getInfo,
   uploadImageHTTP,
 } from "../../api/admin.controller";
 import { toast } from "react-toastify";
+import { AppContext } from "../../AppContext";
 
 const AddGeneral = ({ info }) => {
   const [information, setInformation] = useState();
+  const { setInfor } = useContext(AppContext);
 
   const handleFileChange = async (event) => {
     try {
@@ -63,9 +66,10 @@ const AddGeneral = ({ info }) => {
       information.aboutUsDescription?.length < 500 &&
       information.menuDescription &&
       information.menuDescription?.length < 500
-    )
-      await editInformationHTTP(information);
-    else {
+    ) {
+      const res = await editInformationHTTP(information);
+      if (res?.success) setInfor(await getInfo());
+    } else {
       toast.error("You need to all fields filled", {
         theme: "dark",
       });
