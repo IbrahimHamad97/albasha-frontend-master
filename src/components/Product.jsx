@@ -33,7 +33,7 @@ const Product = ({ item }) => {
       return cartItem;
     });
     setCart(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    localStorage.setItem("carte", JSON.stringify(updatedCart));
   };
 
   const changeQuantity = (type) => {
@@ -45,14 +45,14 @@ const Product = ({ item }) => {
           item.quantity = 0;
           const items = cart.filter((x) => x.index !== item.index);
           setCart(items);
-          localStorage.setItem("cart", JSON.stringify(items));
+          localStorage.setItem("carte", JSON.stringify(items));
         }
       }
     } else {
       if (item.quantity === 0) {
         item.quantity++;
         item.index = cart.length;
-        localStorage.setItem("cart", JSON.stringify([...cart, item]));
+        localStorage.setItem("carte", JSON.stringify([...cart, item]));
         setCart((prev) => [...prev, item]);
       } else {
         item.quantity++;
@@ -79,7 +79,7 @@ const Product = ({ item }) => {
   const add = (addons, meal) => {
     meal.addedOptions = addons;
     meal.index = cart.length;
-    localStorage.setItem("cart", JSON.stringify([...cart, meal]));
+    localStorage.setItem("carte", JSON.stringify([...cart, meal]));
     setCart((prev) => [...prev, meal]);
   };
 

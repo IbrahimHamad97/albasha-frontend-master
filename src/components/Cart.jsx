@@ -17,7 +17,8 @@ const Cart = () => {
   };
 
   useEffect(() => {
-    const items = localStorage.getItem("cart");
+    localStorage.removeItem("cart");
+    const items = localStorage.getItem("carte");
     if (items) {
       const parsed = JSON.parse(items);
       if (parsed) {
@@ -41,13 +42,13 @@ const Cart = () => {
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
       message
     )}`;
-    localStorage.removeItem("cart");
+    localStorage.removeItem("carte");
     window.open(url, "_blank");
   };
 
   const removeItem = (item) => {
     localStorage.setItem(
-      "cart",
+      "carte",
       cart.filter((obj) => obj.index !== item.index)
     );
     setCart((current) => current.filter((obj) => obj.index !== item.index));
@@ -70,7 +71,7 @@ const Cart = () => {
   const add = (addons, meal) => {
     meal.addedOptions = addons;
     cart[meal.index] = meal;
-    localStorage.setItem("cart", JSON.stringify([...cart, meal]));
+    localStorage.setItem("carte", JSON.stringify([...cart, meal]));
   };
 
   return (

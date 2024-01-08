@@ -46,7 +46,12 @@ const AddProduct = ({ products, groups, click }) => {
   };
 
   const handleUpload = async () => {
-    if (product.description && product.price >= 0 && product.name) {
+    if (
+      product.description &&
+      product.price >= 0 &&
+      product.name &&
+      product.image
+    ) {
       let type = "create";
       if (product.id !== -1) type = "edit";
       const data = await addProductHTTP(product, type);
